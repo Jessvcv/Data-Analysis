@@ -1,0 +1,111 @@
+---
+title: "Week 1 Lab"
+author: Jessica Tran
+date: today 
+title-block-banner: true
+theme: spacelab
+format: html
+editor: visual
+---
+
+## Problem 1
+
+Create two data vectors $x$ and $y$ that contain the integers 1 to 21 and −10 to 10. Print both vectors.
+
+```{r}
+x <- c(1:21)
+x
+y <- c(-10:10)
+y
+```
+
+Do the following:
+
+\(a\) Add, subtract, multiply, and divide $x$ by $y$. Place a comment after each line of code explaining what operation you are performing in words.
+
+```{r}
+x+y #adding x & y
+x-y #subtracting x & y
+x*y #multiplying by x & y
+x/y #dividing x by y
+```
+
+\(b\) Find the mean of each data set.
+
+```{r}
+mean(x) #mean of vector x
+mean(y) #mean of vector y
+```
+
+\(c\) Find the corrected sum of squares for each data set. The formula for this is:
+
+$$
+\sum (x_i - \bar{x})^2
+$$
+
+```{r}
+sum((x-mean(x))^2) 
+sum((y-mean(y))^2)
+```
+
+\(d\) Find the mean of the product of $x$ and $y$.
+
+```{r}
+mean(x*y)
+```
+
+## Problem 2
+
+![](Problem_2.png)
+
+Create a data frame called `data` with the `Problem_2.png` image on Canvas. Create your own column names as you see fit. Print `data`.
+
+```{r}
+data <- data.frame(
+  "Participants" = c(1:10),
+  "Level Ground" = c(56,50,41,65,47,50,64,48,47,57), 
+  "Slope" = c(38,50,46,46,42,41,49,38,49,55)
+)
+data
+```
+
+Add a column to `data` which is the ratio of the score standing on level ground to the score standing on a slope. Print `data`.
+
+```{r}
+LevelGround <- c(56,50,41,65,47,50,64,48,47,57)
+Slope <-c(38,50,46,46,42,41,49,38,49,55)
+data["Ratio"] <- LevelGround/Slope
+data
+```
+
+Find the mean of the score standing on level ground and the mean score standing on a slope.
+
+```{r}
+mean(data$Level.Ground)
+mean(data$Slope)
+```
+
+## Problem 3
+
+`R` has a few build in data sets, convenient for learning new skills. For example, the famous `iris` data set is built in. In the code chunk below, type in `iris` into the chunk below and run it.
+
+```{r}
+iris
+```
+
+You can treat the object `iris` just like `data` from Problem 3. Find the `min`, `max`, `median`, and `mean` of `Petal.Width`. Leave a comment after each line explaining what operation you are performing.
+
+```{r}
+min(iris$Petal.Width) #minimum of petal width
+max(iris$Petal.Width) #maximum of petal width
+median(iris$Petal.Width) #median of petal width
+mean(iris$Petal.Width) #mean of petal width
+```
+
+## Submitting
+
+Submit the following to Canvas:
+
+-   Your rendered PDF titled Lastname_1R. Make sure your name is at the top of the document.
+
+-   Your .qmd file

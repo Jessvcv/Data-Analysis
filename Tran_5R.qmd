@@ -1,0 +1,106 @@
+---
+title: "Week 5 Lab"
+author: Jessica Tran
+date: today 
+title-block-banner: true
+theme: spacelab
+format: html
+editor: visual
+---
+
+## Data
+
+For this lab, we will be using the data set `CO2`. Take some time to get familiar with the data set using the help function.
+
+```{r}
+?CO2
+```
+
+## Problem 1
+
+Conduct a hypothesis test for a mean of one sample. Using the data set `CO2`and the variable `uptake`, test the null hypothesis that the population mean `uptake` is mean 28 vs. the alternate hypothesis that the population mean `uptake` is less than 28 with a significance level of 0.05.
+
+Check any assumptions:
+
+```{r}
+qqnorm(CO2$uptake)  
+qqline(CO2$uptake)
+```
+
+If the assumptions are met, calculate the p-value:
+
+```{r}
+t.test(CO2$uptake, mu = 28, alternative = "less", conf.level = 0.95)
+```
+
+## Problem 2
+
+Conduct a hypothesis test for independent samples. Use the data set `CO2` and the variables `Type` and `uptake`. Let group 1 be `Quebec`and group 2 be `Mississippi`. Test the null hypothesis that the population mean `uptake` of the `Quebec` samples is the **same** as that of the `Mississippi` samples vs. the alternate hypothesis that the population mean `uptake` of the `Quebec` samples is **different** than that of the `Mississippi` samples with a significance level of 0.01. Comment out each line of code to explain what you are doing.
+
+Check any assumptions:
+
+```{r}
+group1 <- with(CO2, uptake[Type == "Quebec"]) # select just group 1
+group2 <- with(CO2, uptake[Type == "Mississippi"]) # select just group 2
+
+qqnorm(group1)                           # QQ plot for group 1
+qqline(group1)
+
+qqnorm(group2)                           # QQ plot for group 2
+qqline(group2)
+
+var.test(group1, group2)
+```
+
+If the assumptions are met, calculate the p-value:
+
+```{r}
+t.test(uptake ~ Type, data = CO2, alternative = "two.sided", conf.level = 0.99, paired = FALSE, var.equal = TRUE)
+```
+
+## Problem 3
+
+Conduct a hypothesis test for paired samples. Use the data set `CO2` and the variable `uptake`. Let group 1 be `chilled` and group 2 be `nonchilled`. Test the null hypothesis that the population mean `uptake`of the `chilled` samples is the same as that of the `nonchilled` samples vs. the alternate hypothesis that the population mean `uptake` of the `chilled` samples is different than that of the `nonchilled` samples with a significance level of 0.05. Comment out each line of code to explain what you are doing.
+
+Check any assumptions:
+
+```{r}
+group1 <- with(CO2, uptake[Treatment == "chilled"]) # select just group 1
+group2 <- with(CO2, uptake[Treatment == "nonchilled"]) # select just group 2
+
+differenced_data <- group1 - group2     
+
+qqnorm(differenced_data)
+qqline(differenced_data)
+```
+
+If the assumptions are met, calculate the p-value:
+
+```{r}
+t.test(uptake ~ Treatment, data = CO2, alternative = "two.sided", conf.level = 0.95, paired = TRUE)
+```
+
+## Problem 4
+
+Conduct a hypothesis test for one proportion. We are interested in knowing what proportion of plants have an uptake greater than 25 $\mu$mol/ $m^2$ sec. Out of the 84 plants, 49 of them had an uptake greater than 25 $\mu$mol/ $m^2$ sec. At a significance level of 1%, can you conclude that a majority of plants have an update greater than 25 $\mu$mol/ $m^2$ sec. Comment out each line of code to explain what you are doing.
+
+Check any assumptions:
+
+```{r}
+84*(0.5)         #np
+84*(1-0.5)     #n(1-p)
+```
+
+If the assumptions are met, calculate the p-value:
+
+```{r}
+prop.test(49, 84, p = 0.5, alternative = "greater", correct = FALSE)
+```
+
+## Submitting
+
+Submit the following to Canvas:
+
+-   Your rendered PDF titled Lastname_5R. Make sure your name is at the top of the document.
+
+-   Your .qmd file

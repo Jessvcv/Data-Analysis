@@ -1,0 +1,74 @@
+---
+title: "Week 7 Lab"
+author: Jessica Tran
+date: today 
+title-block-banner: true
+theme: spacelab
+format: html
+editor: visual
+---
+
+## Packages
+
+We will need the following package for this lab:
+
+```{r}
+library(car)
+```
+
+## Data
+
+For this lab, we will be using the data set `chickwts`. Take some time to get familiar with the data set using the help function.
+
+```{r}
+?chickwts
+```
+
+## Problem 1
+
+Using the data set `chickwts`, test to see if there is any significant difference between the average `weight` of of chicks based on the factors `feed`. Use a significance level of 0.05
+
+Conduct the test.
+
+```{r}
+output <- aov(weight ~ feed, data = chickwts)
+```
+
+Check the normality assumption.
+
+```{r}
+shapiro.test(output$residuals)
+```
+
+Check the equal variance assumption.
+
+```{r}
+leveneTest(output)
+```
+
+Check the independence assumption.
+
+```{r}
+set.seed(1)
+durbinWatsonTest(output)
+```
+
+Display the results.
+
+```{r}
+summary(output)
+```
+
+If appropriate, perform a post hoc analysis.
+
+```{r}
+TukeyHSD(output)
+```
+
+## Submitting
+
+Submit the following to Canvas:
+
+-   Your rendered PDF titled Lastname_7R. Make sure your name is at the top of the document.
+
+-   Your .qmd file

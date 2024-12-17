@@ -1,0 +1,89 @@
+---
+title: "Week 8 Lab"
+author: Jessica Tran
+date: today 
+title-block-banner: true
+theme: spacelab
+format: html
+editor: visual
+---
+
+## Packages
+
+We will need the following packages for this lab:
+
+```{r}
+library("car") 
+library("palmerpenguins")
+```
+
+## Data
+
+For this lab, we will be using the data set `penguins`. Take some time to get familiar with the data set using the help function.
+
+```{r}
+?penguins
+```
+
+## Problem 1
+
+Using the data set `penguins`, perform a Two Way ANOVA test to see if there is any significant difference between the average `body_mass_g` of the penguins based off the factor `species` and the group `sex`. Use a significance level of 0.05
+
+First, check that `species` and `sex` are both factors using the `head` command. If necessary, convert your data to factors.
+
+```{r}
+head(penguins)
+```
+
+Now, conduct the test.
+
+```{r}
+output <- aov(body_mass_g ~ species + sex, data = penguins)
+```
+
+Check the normality assumption.
+
+```{r}
+shapiro.test(output$residuals)
+```
+
+Check the equal variance assumption.
+
+```{r}
+leveneTest(body_mass_g ~ species * sex, data = penguins)
+```
+
+Check the balanced assumption.
+
+```{r}
+table(penguins$species, penguins$sex)
+```
+
+Display the results.
+
+```{r}
+summary(output)
+```
+
+If appropriate, perform a post hoc analysis.
+
+```{r}
+TukeyHSD(output)
+```
+
+## Problem 2
+
+Using the data set `penguins`, perform a Three Way ANOVA test to see if there is any significant difference between the average `body_mass_g` of the penguins based off the factor `species` and the group `sex`, and to determine if there is an interaction. Use a significance level of 0.05.
+
+```{r}
+output1 <- aov(body_mass_g ~ species * sex, data = penguins)
+summary(output1)
+```
+
+## Submitting
+
+Submit the following to Canvas:
+
+-   Your rendered PDF titled Lastname_8R. Make sure your name is at the top of the document.
+
+-   Your .qmd file

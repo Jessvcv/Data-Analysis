@@ -1,0 +1,68 @@
+---
+title: "Week 6 Lab"
+author: Jessica Tran
+date: today 
+title-block-banner: true
+theme: spacelab
+format: html
+editor: visual
+---
+
+## Package Install
+
+We will need the following package for this lab:
+
+```{r}
+library("survival")
+```
+
+## Data
+
+For this lab, we will be using the data set `transplant`. Take some time to get familiar with the data set using the help function.
+
+```{r}
+?transplant
+```
+
+## Problem 1
+
+Using the data file `transplant` and the variable `event`, which is a categorical variable with four categories, test to see if they are uniformly distributed, i.e., the probability that each problem type occurs is 1/4. Use a significance level of 0.05.
+
+Check any assumptions:
+
+```{r}
+output <- chisq.test(table(transplant$event))
+output$expected
+```
+
+If the assumptions are met, calculate the p-value:
+
+```{r}
+output$p.value
+```
+
+## Problem 2
+
+Using the data file `transplant` and the variables `event`, which is a categorical variable with four categories, and `abo`, which is a categorical variable with blood type, test to see if they are independent. Use a significance level of 0.05. You will need to begin by creating a data frame with just those two columns. Ignore any `warnings`.
+
+Check any assumptions:
+
+```{r}
+
+output <- chisq.test(table(transplant$event, transplant$abo))
+output$expected
+```
+
+If the assumptions are met, calculate the p-value:
+
+```{r}
+
+```
+
+## Submitting
+
+Submit the following to Canvas:
+
+-   Your rendered PDF titled Lastname_6R. Make sure your name is at the top of the document.
+
+-   Your .qmd file

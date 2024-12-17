@@ -1,0 +1,101 @@
+---
+title: "Week 2 Lab"
+author: Jessica Tran
+date: today 
+title-block-banner: true
+theme: spacelab
+format: html
+editor: visual
+---
+
+## Packages
+
+We will need the following package for this lab:
+
+```{r}
+library(ggplot2)
+```
+
+## Data
+
+For this lab, we will be using the data set `msleep`. We will explore this data set in Problem 1.
+
+## Problem 1
+
+We will be using the data set `msleep` for this. Explore the data set using the help function.
+
+```{r}
+?msleep
+```
+
+## Problem 2
+
+Create a histogram for the variable `sleep_total`. Select a binwidth you think fits the data best. Change the color of the bars (hint: use `geom_histogram(binwidth = YOUR VALUE, fill = "YOUR COLOR")`. I suggest googling "ggplot 2 colors" for ideas. Change the axis labels to include capital letters, and add a title. Add a theme.
+
+```{r}
+ggplot(msleep, aes(sleep_total)) + 
+  geom_histogram(binwidth = 1, fill = "pink3") +
+  xlab("Hours of Sleep") +
+  ylab("Number of Mammals") +
+  ggtitle("Total Hours of Sleep for Mammals") +
+  theme_classic()
+```
+
+## Problem 3
+
+Create a boxplot for the variable `awake`. Change the color of the box (hint: use `geom_boxplot(fill = "your color"` ). I suggest goggling "ggplot 2 colors" for ideas. Change the axis label to include capital letters, and add a title. Add a different theme.
+
+```{r}
+ggplot(msleep, aes(awake)) +
+  geom_boxplot(fill = "purple1") +
+  xlab("Hours Spent Awake") +
+  ggtitle("Total Hours Spent Awake by Mammals") +
+  theme_minimal()
+```
+
+## Problem 4
+
+Create a scatter plot for the variables `sleep_rem` and `sleep_total`. Plot the line of best fit and remove the confidence interval. Change the axis label to include capital letters, and add a title. Add a different theme. You may get a warning that a few rows were containing missing values and were ignored, that is normal!
+
+```{r}
+ggplot(msleep, aes(sleep_rem, sleep_total)) + 
+  geom_point(colour = "skyblue1") +
+  geom_smooth(method = "lm", se = F) +
+  xlab("Hours of REM Sleep") +
+  ylab("Total Hours of Sleep") +
+  ggtitle("Correlation Between Hours of REM Sleep and Total Hours of Sleep") +
+  theme_dark()
+```
+
+Now set `color = vore` inside your `aes()` function and see what happens. Make sure you change the title to distinguish between the previous graph.
+
+```{r}
+ggplot(msleep, aes(sleep_rem, sleep_total,color = vore)) + 
+  geom_point() +
+  geom_smooth(method = "lm", se = F) +
+  xlab("Hours of REM Sleep") +
+  ylab("Total Hours of Sleep") +
+  ggtitle("Relationship Between Hours of REM Sleep and Total Hours of Sleep") +
+  theme_light()
+```
+
+## Problem 5
+
+Create a bar chart for the variable `vore`. Change the color of the bars. Change the axis label to include capital letters, and add a title. Add a different theme.
+
+```{r}
+ggplot(msleep, aes(vore)) +
+  geom_bar(fill = "pink") +
+  xlab("Vore") +
+  ylab("Number of Mammals") +
+  ggtitle("Types of Genus in Mammals") +
+  theme_bw()
+```
+
+## Submitting
+
+Submit the following to Canvas:
+
+-   Your rendered PDF titled Lastname_2R. Make sure your name is at the top of the document.
+
+-   Your .qmd file

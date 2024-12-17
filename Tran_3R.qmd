@@ -1,0 +1,92 @@
+---
+title: "Week 3 Lab"
+author: Jessica Tran
+date: today 
+title-block-banner: true
+theme: spacelab
+format: html
+editor: visual
+---
+
+## Packages
+
+We will need the following package for this lab:
+
+```{r}
+library(ggplot2)
+```
+
+## Data
+
+For this lab, we will be using the data set `msleep`. Take some time to get familiar with the data set using the help function.
+
+```{r}
+?msleep
+```
+
+## Problem 1
+
+Create a `data.frame` for the variable `vore` that contains the following:
+
+-   The different categories of `vore`
+
+-   The frequencies
+
+-   The relative frequencies (percentages)
+
+-   Appropriate column names
+
+Make sure you print the `data.frame`.
+
+```{r}
+a_sleep <- data.frame(table(msleep$vore))
+a_sleep["Percent"] <- round(a_sleep$Freq/length(msleep$vore), 4)
+colnames(a_sleep) <- c("Vore", "Frequency", "Percent")
+a_sleep
+```
+
+## Problem 2
+
+Find the deciles (that is, every 10th percentile starting with 10th and ending with 90th) for the variable `sleep_total`.
+
+```{r}
+quantile(msleep$sleep_total, c(0.1, .2, .3, .4, .5, .6, .7, .8, .9))
+```
+
+## Problem 3
+
+Calculate the mean, median, min, max, variance, standard deviation, and range of `sleep_total`. Round all values to 2 decimals. Put all of these values in a `data.frame`. Print the `data.frame`.
+
+```{r}
+sleepy <- data.frame(
+  "Mean" = round(mean(msleep$sleep_total), digits = 2),
+  "Median" = round(median(msleep$sleep_total), digits = 2),
+  "Min" = round(min(msleep$sleep_total), digits = 2),
+  "Max" = round(max(msleep$sleep_total), digits = 2),
+  "Variance" = round(var(msleep$sleep_total), digits = 2),
+  "Standard Deviation" = round(sd(msleep$sleep_total), digits = 2),
+  "Range" = round((max(msleep$sleep_total)-min(msleep$sleep_total)), digits = 2)
+)
+sleepy
+```
+
+## Problem 4
+
+Create a `ggplot2` graph that you believe is a good visual for the variable `sleep_total`. Make sure to use a title, theme, axis labels, ect.
+
+```{r}
+ggplot(msleep, aes(sleep_total)) +
+  geom_histogram(binwidth = 1, fill = "pink") +
+  xlab("Hours of Sleep") +
+  ylab("Number of Mammals") +
+  ggtitle("Total Hours of Sleep for Mammals") +
+  theme_light()
+```
+
+## Submitting
+
+Submit the following to Canvas:
+
+-   Your rendered PDF titled Lastname_3R. Make sure your name is at the top of the document.
+
+-   Your .qmd file

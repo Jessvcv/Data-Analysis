@@ -1,0 +1,93 @@
+---
+title: "Week 0 Lab"
+author: Your Name Here
+date: today 
+title-block-banner: true
+theme: spacelab
+format: html
+editor: visual
+---
+
+## Quarto
+
+Quarto enables you to weave together content and executable code into a finished document. To learn more about Quarto see <https://quarto.org>.
+
+## Running Code
+
+When you click the **Render** button a document will be generated that includes both content and the output of embedded code. You can embed code like this:
+
+```{r}
+1 + 1
+```
+
+To run the code prior to rendering, simply click the play button on the above code chunk. The output will display beneath it.
+
+## Packages
+
+`R` has the ability to install and load `packages` which are groups of functions created by other people for specific uses. This is one of the biggest draws of `R`, as specific fields can build packages to meet their needs.
+
+Do the following:
+
+1.  Remove the `#` from the start of each line of code.
+
+2.  Press the play button.
+
+3.  Replace the `#` at the start of each line.
+
+```{r}
+#install.packages("rmarkdown")
+#install.packages("ggplot2")
+#install.packages("survival")
+#install.packages("car")
+#install.packages("coin")
+#install.packages("palmerpenguins")
+#install.packages("finalfit")
+```
+
+Once a package is installed, it is permanently on your computer and you do not need to install it again. To run more efficiently, `R` only starts in "base" mode, meaning only packages that came with the initial install are loaded when you start `R` each time. If you want to use a specific package, say `ggplot2` when coding, you'll need to "load" it in with the following code:
+
+```{r}
+library(ggplot2)
+```
+
+Notice nothing pops up when you do this, which is common for most packages. Now there are a wide number of additional functions you can use.
+
+## Example Homework Problem
+
+A homework problem will look like the following:
+
+### Problem 1
+
+Create a new vector named $x$ which contains the values 0 and 1. To do so, type into the box below:
+
+$x <-~~c(0,1)$
+
+Print the vector by typing just $x$ on a new line underneath.
+
+```{r}
+
+```
+
+Add 5 to the vector. Type
+
+$x + 5$
+
+```{r}
+
+```
+
+Divide the vector my 0. Type
+
+$x/0$
+
+```{r}
+
+```
+
+## Submitting
+
+Submit the following to Canvas:
+
+-   Your rendered PDF titled Lastname_0R. Make sure your name is at the top of the document.
+
+-   Your .qmd file
